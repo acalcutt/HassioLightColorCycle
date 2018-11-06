@@ -1,0 +1,11 @@
+###                                            ###
+### LightsHue - Rotating Hue Every Two Seconds ###
+###                                            ###
+
+- alias: LightsHue - Rotating Hue Every Two Seconds
+  initial_state: True
+  trigger:
+    - platform: time
+      seconds: '/2'
+  action:
+    - service: script.change_exterior
