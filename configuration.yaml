@@ -1,0 +1,9 @@
+# Your "configuration.yaml" need to countain a reference to your automations.yaml and your scripts.yaml.
+# In my case, I don't use "automations.yaml" but my config is split in various files in "automation" folder.
+# YMMV
+
+[...]
+
+automation: !include_dir_merge_list automation/
+#automation: !include automations.yaml
+script: !include scripts.yaml

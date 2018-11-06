@@ -9,3 +9,25 @@
       seconds: '/2'
   action:
     - service: script.change_exterior
+
+### Possibly unrelated and not required piece of code...                                                   ###
+### This is checking every minute the availability of the light bulb.                                      ###
+### By setting the brightness to current brightness it force the gateway to report the unavailable status. ###
+### This code was found here: https://github.com/home-assistant/home-assistant/issues/17675                ###
+
+- alias: "unavailable_couleur"
+  initial_state: 'on'
+  trigger:
+    platform: time
+    minutes: '/1'
+    seconds: 10
+  condition: 
+    condition: template
+    value_template: >
+      {{ states('light.couleur') != 'unavailable'}}
+  action:
+    service: light.turn_on
+    data_template:
+      entity_id: light.couleur
+      brightness: >
+        {{ state_attr('light.couleur','brightness') | int }}
